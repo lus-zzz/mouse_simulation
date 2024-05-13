@@ -1,0 +1,7 @@
+Makefile*
+.qtc_clangd
+release
+debug
+*.user
+.qmake.stash
+ui_mainwindow.h

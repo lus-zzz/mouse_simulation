@@ -1,0 +1,6 @@
+[submodule "QtGlobalEvent"]
+	path = QtGlobalEvent
+	url = https://github.com/mahuifa/QtGlobalEvent.git
+[submodule "input_lite"]
+	path = input_lite
+	url = https://github.com/smasherprog/input_lite.git
