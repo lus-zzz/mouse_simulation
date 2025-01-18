@@ -272,62 +272,81 @@ void MainWindow::keyMouseProcess(QString json_str) {
 
   switch (type) {
     case 1: {
-      if(ch9329)ch9329->mouseMove(x,y);
-//      SL::Input_Lite::SendInput(
-//          SL::Input_Lite::MousePositionAbsoluteEvent{x, y});
+          if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mouseMove(x,y);
+          else
+             SL::Input_Lite::SendInput(
+                 SL::Input_Lite::MousePositionAbsoluteEvent{x, y});
       break;
       case 2:
         if (event == 0) {  //鼠标左键按下
-            if(ch9329)ch9329->mousePress();
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
-//              true, SL::Input_Lite::MouseButtons::LEFT});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mousePress();
+            else
+                 SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
+                     true, SL::Input_Lite::MouseButtons::LEFT});
 
         } else if (event == 1) {  //鼠标左键松开
-            if(ch9329)ch9329->mouseRelease();
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
-//              false, SL::Input_Lite::MouseButtons::LEFT});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mouseRelease();
+            else
+                 SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
+                     false, SL::Input_Lite::MouseButtons::LEFT});
         }
         break;
       case 3:
         if (event == 0) {
-            if(ch9329)ch9329->mousePress(MOUSE_RIGHT_BUTTON);
-
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
-//              true, SL::Input_Lite::MouseButtons::RIGHT});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mousePress(MOUSE_RIGHT_BUTTON);
+            else
+                SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
+                     true, SL::Input_Lite::MouseButtons::RIGHT});
         } else if (event == 1) {
-            if(ch9329)ch9329->mouseRelease();
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
-//              false, SL::Input_Lite::MouseButtons::RIGHT});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mouseRelease();
+            else
+         SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
+             false, SL::Input_Lite::MouseButtons::RIGHT});
         }
         break;
       case 4:
         if (event == 0) {
-            if(ch9329)ch9329->mousePress(MOUSE_MIDDLE_BUTTON);
-
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
-//              true, SL::Input_Lite::MouseButtons::MIDDLE});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mousePress(MOUSE_MIDDLE_BUTTON);
+            else
+             SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
+                 true, SL::Input_Lite::MouseButtons::MIDDLE});
         } else if (event == 1) {
-            if(ch9329)ch9329->mouseRelease();
-
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
-//              false, SL::Input_Lite::MouseButtons::MIDDLE});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mouseRelease();
+            else
+             SL::Input_Lite::SendInput(SL::Input_Lite::MouseButtonEvent{
+                 false, SL::Input_Lite::MouseButtons::MIDDLE});
         } else if (event == 2) {
-            if(ch9329)ch9329->mouseWheel(0x01);
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{1});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mouseWheel(0x01);
+            else
+                 SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{1});
         } else if (event == 3) {
-            if(ch9329)ch9329->mouseWheel(0x81);
-//          SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{-1});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->mouseWheel(0x81);
+            else
+                SL::Input_Lite::SendInput(SL::Input_Lite::MouseScrollEvent{-1});
         }
         break;
       case 5:
         if (event == 0) {
-            if(ch9329)ch9329->press(SL::Input_Lite::ConvertToKeyCode(code));
-//          SL::Input_Lite::SendInput(SL::Input_Lite::KeyEvent{
-//              true, SL::Input_Lite::ConvertToKeyCode(code)});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->press(SL::Input_Lite::ConvertToKeyCode(code));
+            else
+             SL::Input_Lite::SendInput(SL::Input_Lite::KeyEvent{
+                 true, SL::Input_Lite::ConvertToKeyCode(code)});
         } else if (event == 1) {
-            if(ch9329)ch9329->releaseAll();
-//          SL::Input_Lite::SendInput(SL::Input_Lite::KeyEvent{
-//              false, SL::Input_Lite::ConvertToKeyCode(code)});
+            if(m_serial_port.ch9329())
+                m_serial_port.ch9329()->releaseAll();
+            else
+             SL::Input_Lite::SendInput(SL::Input_Lite::KeyEvent{
+                 false, SL::Input_Lite::ConvertToKeyCode(code)});
         }
         break;
       default:
@@ -556,8 +575,9 @@ void MainWindow::on_pushButton_5_clicked() {
 
 
 
-void MainWindow::on_pushButton_8_clicked()
+
+void MainWindow::on_pushButton_6_clicked()
 {
-    ch9329 = QSharedPointer<CH9329>::create(ui->comboBoxPortNames->currentText());
+    m_serial_port.exec();
 }
 

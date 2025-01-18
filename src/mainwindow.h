@@ -10,6 +10,7 @@
 #include <QSharedPointer>
 #include <globalmouseevent.h>
 #include "globalkeyevent.h"
+#include "serialportdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,7 +47,7 @@ private slots:
 
     void on_pushButton_5_clicked();
 
-    void on_pushButton_8_clicked();
+    void on_pushButton_6_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -54,7 +55,9 @@ private:
     std::atomic_bool exit_flags{false};
     bool install{false};
     bool press_flags{true};
-    QSharedPointer<CH9329> ch9329;
+
+    SerialPortDialog m_serial_port;
+
 
 };
 #endif // MAINWINDOW_H
