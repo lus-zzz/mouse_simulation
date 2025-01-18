@@ -129,7 +129,7 @@ void MainWindow::on_keyEvent(QKeyEvent* event) {
   } else if (event->type() == QKeyEvent::KeyRelease &&
              event->key() == Qt::Key_F9) {
     if (press_flags) {
-      on_pushButton_2_clicked();
+      // on_pushButton_2_clicked();
       on_pushButton_5_clicked();
     } else {
       exit_flags = true;
